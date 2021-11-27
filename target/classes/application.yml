@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mint-db.cuytor0vm4dq.us-east-1.rds.amazonaws.com:3306/mint
+    username: admin
+    password: admin123
+  jpa:
+    hibernate:
+      ddl-auto: update
+mqtt:
+  username: mint
+  port: '1883'
+  hostname: 3.89.90.95
+  password: mint
+  topic: mint.sensor.plant.data

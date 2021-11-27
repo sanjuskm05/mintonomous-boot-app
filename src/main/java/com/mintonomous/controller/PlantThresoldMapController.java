@@ -12,38 +12,40 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mintonomous.model.Plant;
 import com.mintonomous.model.PlantData;
+import com.mintonomous.repository.ActionRepository;
 import com.mintonomous.repository.PlantDataRepository;
 import com.mintonomous.repository.PlantRepository;
+import com.mintonomous.repository.PlantThresoldMapRepository;
 
 @RestController
-@RequestMapping("plant-data")
+@RequestMapping("plant-thresold-config")
 public class PlantThresoldMapController {
 	@Autowired
-	private PlantDataRepository plantDataRepository;
+	private PlantThresoldMapRepository plantThresoldMapRepository;
+	
+	@Autowired
+	private ActionRepository actionRepository;
 	
 	@Autowired
 	private PlantRepository plantRepository;
 
 	@PostMapping(path = "/add")
-	public @ResponseBody String addNewPlant(@RequestParam Float temperature,
-			@RequestParam Float mositure,
-			@RequestParam Float humidity,
-			@RequestParam Float light,
+	public @ResponseBody String addNewPlant(@RequestParam Float minTemperature,
+			@RequestParam Float minMositure,
+			@RequestParam Float minHumidity,
+			@RequestParam Float minLight,
+			@RequestParam Float maxTemperature,
+			@RequestParam Float maxMositure,
+			@RequestParam Float maxHhumidity,
+			@RequestParam Float maxLight,
 			@RequestParam String name) {
 
-		Plant plant = plantRepository.findByName(name).get(0);
-		PlantData plantData = new PlantData();
-		plantData.setHumidity(humidity);
-		plantData.setLight(light);
-		plantData.setTemperature(temperature);
-		plantData.setMositure(mositure);
-		plantData.setPlantId(plant.getPlantId());
-		plantData.setLastUpdatedDate(LocalDate.now());
+		// TODO save the thresold mapping
 		
 		
 		// TODO before saving validate the data against the plant_thresold_map
 		
-		plantDataRepository.save(plantData);
+
 		return "Saved";
 	}
 
@@ -51,7 +53,8 @@ public class PlantThresoldMapController {
 	@GetMapping(path = "/all")
 	public @ResponseBody Iterable<PlantData> getAllPlants() {
 		// This returns a JSON
-		return plantDataRepository.findAll();
+		// TODO return all the thresold
+		return null;
 	}
 
 }

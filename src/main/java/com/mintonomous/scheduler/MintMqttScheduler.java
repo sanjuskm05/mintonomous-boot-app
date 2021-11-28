@@ -49,7 +49,7 @@ public class MintMqttScheduler {
 	@Autowired
 	PlantThresoldMapRepository mapRepository;
 
-	@Scheduled(fixedRateString = "60000", initialDelayString = "60000")
+	@Scheduled(fixedRateString = "300000", initialDelayString = "300000")
 	public void performAnalysisAndPublishCmd() throws MqttPersistenceException, MqttException {
 		logger.info("performAnalysisAndPublishCmd");
 		List<PlantData> plantsData = plantDataRepository.findByIsAnalyzed(false);

@@ -2,6 +2,8 @@ package com.mintonomous.controller;
 
 import java.time.LocalDate;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mintonomous.model.Plant;
 import com.mintonomous.repository.PlantRepository;
+import com.mintonomous.service.MintMqttService;
 
 @RestController
 @RequestMapping("plant")
@@ -21,6 +24,11 @@ public class PlantController {
 	@Autowired
 	private PlantRepository plantRepository;
 
+	
+	@Autowired
+	MintMqttService messagingService;
+	
+	
 	@PostMapping(path = "/add")
 	public @ResponseBody String addNewPlant(@RequestParam String name, @RequestParam String description) {
 
@@ -33,7 +41,7 @@ public class PlantController {
 	}
 
 	@PutMapping(path = "/update") // Map ONLY POST Requests
-	public @ResponseBody String updatePlant(@RequestParam String name, @RequestParam String description) {
+	public @ResponseBody String updatePlant(@RequestParam String name, @RequestParam String description) throws MqttPersistenceException, MqttException, InterruptedException {
 
 		Plant plant = plantRepository.findByName(name).get(0);
 		plant.setDescription(description);

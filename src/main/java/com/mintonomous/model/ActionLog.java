@@ -2,6 +2,7 @@ package com.mintonomous.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,23 +16,15 @@ import lombok.NoArgsConstructor;
 @Entity // This tells Hibernate to make a table out of this class
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlantData {
+public class ActionLog {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer plantDataId;
-	
-	private Integer plantId;
+	private Integer actionLogId;
 
-	private Float temperature;
+	private Integer actionId;
 
-	private Float light;
-
-	private Float humidity;
-
-	private Float moisture;
+	private Boolean isComplete;	
 	
 	private LocalDate lastUpdatedDate;
-	
-	private Boolean isAnalyzed = Boolean.FALSE;
 
 }

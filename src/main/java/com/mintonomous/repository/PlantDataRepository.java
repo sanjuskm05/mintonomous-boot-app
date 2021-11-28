@@ -1,5 +1,7 @@
 package com.mintonomous.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.mintonomous.model.PlantData;
@@ -8,4 +10,5 @@ import com.mintonomous.model.PlantData;
 // CRUD refers Create, Read, Update, Delete
 
 public interface PlantDataRepository extends CrudRepository<PlantData, Integer> {
+	List<PlantData> findByIsAnalyzed(Boolean isAnalyzed);
 }

@@ -1,7 +1,5 @@
 package com.mintonomous.model;
 
-import java.time.LocalDate;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,8 +15,6 @@ public class PlantDataPayload {
 
 	private Float humidity;
 
-	private Float mositure;
-	
-	private LocalDate lastUpdatedDate;
+	private Float moisture;
 
 }

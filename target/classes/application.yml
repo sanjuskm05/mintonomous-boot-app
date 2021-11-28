@@ -12,4 +12,9 @@ mqtt:
   port: '1883'
   hostname: 3.89.90.95
   password: mint
-  topic: mint.sensor.plant.data
+  subTopic: mintsub
+  pubTopic: mintpub
+  automaticReconnect: true
+  cleanSession: true
+  connectionTimeout: 10
+  clientId: mintonomous-mqtt

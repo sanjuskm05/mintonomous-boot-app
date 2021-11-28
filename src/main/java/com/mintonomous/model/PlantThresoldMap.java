@@ -28,7 +28,7 @@ public class PlantThresoldMap {
 
 	private Float minHumidity;
 
-	private Float minMositure;
+	private Float minMoisture;
 	
 	private Float maxTemperature;
 
@@ -36,7 +36,7 @@ public class PlantThresoldMap {
 
 	private Float maxHumidity;
 
-	private Float maxMositure;
+	private Float maxMoisture;
 	
 	private LocalDate lastUpdatedDate;
 	

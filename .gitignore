@@ -1,3 +1,5 @@
+target/
+mintonomous-mqtt*/
 # Compiled class file
 *.class
 

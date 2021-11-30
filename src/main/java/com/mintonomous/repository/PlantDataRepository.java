@@ -11,4 +11,5 @@ import com.mintonomous.model.PlantData;
 
 public interface PlantDataRepository extends CrudRepository<PlantData, Integer> {
 	List<PlantData> findByIsAnalyzed(Boolean isAnalyzed);
+	List<PlantData> findByPlantIdOrderByLastUpdatedDateDesc(Integer plantId);
 }

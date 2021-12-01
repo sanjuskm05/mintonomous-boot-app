@@ -1,6 +1,6 @@
 package com.mintonomous.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +38,7 @@ public class PlantThresoldMap {
 
 	private Float maxMoisture;
 	
-	private LocalDate lastUpdatedDate;
+	private LocalDateTime lastUpdatedDate;
 	
 	private Integer configuredActionId;
 

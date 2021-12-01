@@ -1,6 +1,6 @@
 package com.mintonomous.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +26,6 @@ public class Action {
 
 	private String description;
 	
-	private LocalDate lastUpdatedDate;
+	private LocalDateTime lastUpdatedDate;
 
 }

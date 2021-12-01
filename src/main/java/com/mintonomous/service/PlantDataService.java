@@ -1,6 +1,6 @@
 package com.mintonomous.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -32,7 +32,7 @@ public class PlantDataService {
 		} else {
 			plant = new Plant();
 			plant.setName(name);
-			plant.setLastUpdatedDate(LocalDate.now());
+			plant.setLastUpdatedDate(LocalDateTime.now());
 			plantRepository.save(plant);
 			plant = plantRepository.findByName(name).get(0);
 		}
@@ -42,7 +42,7 @@ public class PlantDataService {
 		plantData.setTemperature(temperature);
 		plantData.setMoisture(moisture);
 		plantData.setPlantId(plant.getPlantId());
-		plantData.setLastUpdatedDate(LocalDate.now());
+		plantData.setLastUpdatedDate(LocalDateTime.now());
 		
 		return plantDataRepository.save(plantData);
 	}

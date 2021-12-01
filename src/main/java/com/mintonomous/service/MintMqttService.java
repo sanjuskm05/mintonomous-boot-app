@@ -14,9 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mintonomous.model.PlantData;
 import com.mintonomous.model.PlantDataPayload;
-import com.mintonomous.scheduler.MintMqttScheduler;
 
 @Service
 public class MintMqttService {

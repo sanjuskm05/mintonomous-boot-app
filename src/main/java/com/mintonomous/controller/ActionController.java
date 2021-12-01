@@ -1,6 +1,6 @@
 package com.mintonomous.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class ActionController {
 		Action action = new Action();
 		action.setName(name);
 		action.setDescription(description);
-		action.setLastUpdatedDate(LocalDate.now());
+		action.setLastUpdatedDate(LocalDateTime.now());
 		action = actionRepository.save(action);
 		return new ResponseEntity<Action>(action, HttpStatus.OK);
 	}
@@ -39,7 +39,7 @@ public class ActionController {
 
 		Action action = actionRepository.findByName(name).get(0);
 		action.setDescription(description);
-		action.setLastUpdatedDate(LocalDate.now());
+		action.setLastUpdatedDate(LocalDateTime.now());
 		actionRepository.save(action);
 		return "Updated";
 	}

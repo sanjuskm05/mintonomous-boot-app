@@ -1,6 +1,7 @@
 package com.mintonomous.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
@@ -36,7 +37,7 @@ public class PlantController {
 		Plant plant = new Plant();
 		plant.setName(name);
 		plant.setDescription(description);
-		plant.setLastUpdatedDate(LocalDate.now());
+		plant.setLastUpdatedDate(LocalDateTime.now());
 		plantRepository.save(plant);
 		return "Saved";
 	}
@@ -46,7 +47,7 @@ public class PlantController {
 
 		Plant plant = plantRepository.findByName(name).get(0);
 		plant.setDescription(description);
-		plant.setLastUpdatedDate(LocalDate.now());
+		plant.setLastUpdatedDate(LocalDateTime.now());
 		plantRepository.save(plant);
 		return "Updated";
 	}

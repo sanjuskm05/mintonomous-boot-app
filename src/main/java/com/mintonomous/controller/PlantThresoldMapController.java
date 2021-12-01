@@ -1,6 +1,6 @@
 package com.mintonomous.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mintonomous.model.Action;
 import com.mintonomous.model.Plant;
-import com.mintonomous.model.PlantData;
 import com.mintonomous.model.PlantThresoldMap;
 import com.mintonomous.repository.ActionRepository;
 import com.mintonomous.repository.PlantRepository;
@@ -53,7 +52,7 @@ public class PlantThresoldMapController {
 		} else {
 			action = new Action();
 			action.setName(actionName);
-			action.setLastUpdatedDate(LocalDate.now());
+			action.setLastUpdatedDate(LocalDateTime.now());
 			actionRepository.save(action);
 			action = actionRepository.findByName(actionName).get(0);
 		}
@@ -64,13 +63,13 @@ public class PlantThresoldMapController {
 		} else {
 			plant = new Plant();
 			plant.setName(plantName);
-			plant.setLastUpdatedDate(LocalDate.now());
+			plant.setLastUpdatedDate(LocalDateTime.now());
 			plantRepository.save(plant);
 			plant = plantRepository.findByName(plantName).get(0);
 		}
 		PlantThresoldMap plantThresoldMap = new PlantThresoldMap(null, plant.getPlantId(), 
 				minTemperature, minLight, minHumidity, minMoisture, 
-				maxTemperature, maxLight, maxHumidity, maxMoisture, LocalDate.now(), 
+				maxTemperature, maxLight, maxHumidity, maxMoisture, LocalDateTime.now(), 
 				action.getActionId());
 		plantThresoldMap = plantThresoldMapRepository.save(plantThresoldMap);
 

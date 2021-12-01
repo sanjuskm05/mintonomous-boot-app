@@ -1,6 +1,6 @@
 package com.mintonomous.scheduler;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -68,7 +68,7 @@ public class MintMqttScheduler {
 				plantData.setIsAnalyzed(true);
 				plantDataRepository.save(plantData);
 				// insert action_log
-				ActionLog actionLog = new ActionLog(null, fetchActionIfMatches.getActionId(), true, LocalDate.now());
+				ActionLog actionLog = new ActionLog(null, fetchActionIfMatches.getActionId(), true, LocalDateTime.now());
 				actionLogRepository.save(actionLog);
 			}
 

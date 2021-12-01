@@ -1,6 +1,7 @@
 package com.mintonomous.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class PlantData {
 
 	private Float moisture;
 	
-	private LocalDate lastUpdatedDate;
+	private LocalDateTime lastUpdatedDate;
 	
 	private Boolean isAnalyzed = Boolean.FALSE;
 

@@ -9,6 +9,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+logging:
+  file: 
+    name: logs/application.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"  
+  level:
+    root: INFO   
 mqtt:
   username: mint
   port: '1883'

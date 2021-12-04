@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.mintonomous.model.PlantData;
 import com.mintonomous.model.PlantThresoldMap;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository

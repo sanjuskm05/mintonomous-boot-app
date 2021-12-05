@@ -49,7 +49,7 @@ public class MintMqttScheduler {
 	@Autowired
 	PlantThresoldMapRepository mapRepository;
 
-	@Scheduled(fixedRateString = "300000", initialDelayString = "300000")
+	@Scheduled(fixedRateString = "60000", initialDelayString = "60000")
 	public void performAnalysisAndPublishCmd() throws MqttPersistenceException, MqttException {
 		logger.info("performAnalysisAndPublishCmd");
 		List<PlantData> plantsData = plantDataRepository.findByIsAnalyzed(false);
@@ -61,15 +61,16 @@ public class MintMqttScheduler {
 			Action fetchActionIfMatches = fetchActionIfMatches(plantData);
 			if (fetchActionIfMatches != null && fetchActionIfMatches.getActionId() != 0) {
 				Plant plant = plantRepository.findById(plantData.getPlantId()).get();
+				String payload = "plantName:" + plant.getName() + ", actionName:" + fetchActionIfMatches.getName();
 				// publish action over mqtt
-				messagingService.publish(
-						"plantName:" + plant.getName() + ", actionName:" + fetchActionIfMatches.getName(), 0, true);
+				messagingService.publish(payload, 0, true);
 				// update is_analyzed true
 				plantData.setIsAnalyzed(true);
 				plantDataRepository.save(plantData);
 				// insert action_log
 				ActionLog actionLog = new ActionLog(null, fetchActionIfMatches.getActionId(), true, LocalDateTime.now());
 				actionLogRepository.save(actionLog);
+				logger.info("payload - {}", payload);
 			}
 
 		}

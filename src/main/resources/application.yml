@@ -22,8 +22,8 @@ mqtt:
   port: '1883'
   hostname: 3.89.90.95
   password: mint
-  subTopic: mintsub
-  pubTopic: mintpub
+  subTopic: mintpub
+  pubTopic: mintsub
   automaticReconnect: true
   cleanSession: true
   connectionTimeout: 10

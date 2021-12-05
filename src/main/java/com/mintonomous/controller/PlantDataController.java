@@ -60,7 +60,7 @@ public class PlantDataController {
 			Integer plantId = plants.get(0).getPlantId();
 			List<PlantData> plantData = plantDataRepository.findByPlantIdOrderByLastUpdatedDateDesc(plantId);
 			if (plantData != null && !plantData.isEmpty()) {
-				return plantDataRepository.findByPlantIdOrderByLastUpdatedDateDesc(plantId).get(0);
+				return plantData.get(0);
 			}
 		}
 		return new PlantData();

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mintonomous.model.Plant;
 import com.mintonomous.model.PlantData;
+import com.mintonomous.model.PlantDataReportPayload;
+import com.mintonomous.repository.PlantDataReportRepository;
 import com.mintonomous.repository.PlantDataRepository;
 import com.mintonomous.repository.PlantRepository;
 import com.mintonomous.service.PlantDataService;
@@ -27,6 +29,9 @@ public class PlantDataController {
 
 	@Autowired
 	private PlantRepository plantRepository;
+	
+	@Autowired
+	private PlantDataReportRepository plantDataReportRepository;
 
 	@Autowired
 	private PlantDataService plantDataService;
@@ -64,5 +69,11 @@ public class PlantDataController {
 			}
 		}
 		return new PlantData();
+	}
+	
+	@CrossOrigin
+	@GetMapping(path = "/plant-daily-data")
+	public @ResponseBody List<PlantDataReportPayload> getPlantDailyData(@RequestParam String name) {
+		return plantDataReportRepository.findAvgPlantDataByEveryHourForLast1Day(name);
 	}
 }

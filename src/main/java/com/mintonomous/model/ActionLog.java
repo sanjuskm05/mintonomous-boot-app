@@ -25,5 +25,7 @@ public class ActionLog {
 	private Boolean isComplete;	
 	
 	private LocalDateTime lastUpdatedDate;
+	
+	private Integer plantId;
 
 }

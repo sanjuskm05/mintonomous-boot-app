@@ -61,14 +61,16 @@ public class MintMqttScheduler {
 			Action fetchActionIfMatches = fetchActionIfMatches(plantData);
 			if (fetchActionIfMatches != null && fetchActionIfMatches.getActionId() != 0) {
 				Plant plant = plantRepository.findById(plantData.getPlantId()).get();
-				String payload = "plantName:" + plant.getName() + ", actionName:" + fetchActionIfMatches.getName();
+				String payload = plant.getName() + "," 
+				+ ("water".equalsIgnoreCase(fetchActionIfMatches.getName()) ? "1" : "0")
+						+ "," + ("light".equalsIgnoreCase(fetchActionIfMatches.getName()) ? "1" : "0") ;
 				// publish action over mqtt
 				messagingService.publish(payload, 0, true);
 				// update is_analyzed true
 				plantData.setIsAnalyzed(true);
 				plantDataRepository.save(plantData);
 				// insert action_log
-				ActionLog actionLog = new ActionLog(null, fetchActionIfMatches.getActionId(), true, LocalDateTime.now());
+				ActionLog actionLog = new ActionLog(null, fetchActionIfMatches.getActionId(), true, LocalDateTime.now(), plant.getPlantId());
 				actionLogRepository.save(actionLog);
 				logger.info("payload - {}", payload);
 			}

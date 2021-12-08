@@ -13,3 +13,5 @@ Our autonomous system - “Mintonomous” helps us do following:
 
 # Swagger
 http://localhost:8081/swagger-ui/
+
+![Picture1](https://user-images.githubusercontent.com/8688478/145160164-03544b3e-0b34-48be-b2ab-2eb4017fc32b.png)

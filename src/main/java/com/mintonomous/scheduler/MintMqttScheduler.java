@@ -2,6 +2,7 @@ package com.mintonomous.scheduler;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
@@ -61,9 +62,13 @@ public class MintMqttScheduler {
 			Action fetchActionIfMatches = fetchActionIfMatches(plantData);
 			if (fetchActionIfMatches != null && fetchActionIfMatches.getActionId() != 0) {
 				Plant plant = plantRepository.findById(plantData.getPlantId()).get();
+				String[] s = {"light", "array"};
+
+				Random ran = new Random();
+				String lightAction = s[ran.nextInt(s.length)];
 				String payload = plant.getName() + "," 
 				+ ("water".equalsIgnoreCase(fetchActionIfMatches.getName()) ? "1" : "0")
-						+ "," + ("light".equalsIgnoreCase(fetchActionIfMatches.getName()) ? "1" : "0") ;
+						+ "," + ("light".equalsIgnoreCase(lightAction) ? "1" : "0") ;
 				// publish action over mqtt
 				messagingService.publish(payload, 0, true);
 				// update is_analyzed true

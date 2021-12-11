@@ -1,0 +1,67 @@
+CREATE TABLE `action` (
+  `action_id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `last_updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`action_id`),
+  UNIQUE KEY `action_name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `action_log` (
+  `action_log_id` int NOT NULL,
+  `action_id` int NOT NULL,
+  `last_updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_complete` tinyint NOT NULL DEFAULT '0',
+  `plant_id` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`action_log_id`),
+  KEY `fk_action_log_action_id_idx` (`action_id`),
+  CONSTRAINT `fk_action_log_action_id` FOREIGN KEY (`action_id`) REFERENCES `action` (`action_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `plant` (
+  `plant_id` int NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `last_updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`plant_id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `plant_data` (
+  `plant_data_id` int NOT NULL,
+  `plant_id` int NOT NULL,
+  `message_id` int DEFAULT NULL,
+  `temperature` float NOT NULL,
+  `humidity` float NOT NULL DEFAULT '0',
+  `light` float NOT NULL DEFAULT '0',
+  `moisture` float NOT NULL DEFAULT '0',
+  `last_updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_analyzed` tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (`plant_data_id`),
+  KEY `fk_plant_idx` (`plant_id`),
+  CONSTRAINT `fk_plant` FOREIGN KEY (`plant_id`) REFERENCES `plant` (`plant_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `plant_thresold_map` (
+  `plant_thresold_map_id` int NOT NULL,
+  `plant_id` int NOT NULL,
+  `min_temperature` float NOT NULL DEFAULT '0',
+  `min_humidity` float NOT NULL DEFAULT '0',
+  `min_moisture` float NOT NULL DEFAULT '0',
+  `min_light` float NOT NULL DEFAULT '0',
+  `max_temperature` float NOT NULL DEFAULT '0',
+  `max_humidity` float NOT NULL DEFAULT '0',
+  `max_moisture` float NOT NULL DEFAULT '0',
+  `max_light` float NOT NULL DEFAULT '0',
+  `last_updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `configured_action_id` int NOT NULL,
+  `max_mositure` float DEFAULT NULL,
+  `min_mositure` float DEFAULT NULL,
+  PRIMARY KEY (`plant_thresold_map_id`),
+  UNIQUE KEY `ck_plant_action` (`plant_id`,`configured_action_id`),
+  KEY `fk_action_id_idx` (`configured_action_id`),
+  KEY `fk_threasold_map_plant_id_idx` (`plant_id`) /*!80000 INVISIBLE */,
+  CONSTRAINT `fk_threasold_map_action_id` FOREIGN KEY (`configured_action_id`) REFERENCES `action` (`action_id`),
+  CONSTRAINT `fk_threasold_map_plant_id` FOREIGN KEY (`plant_id`) REFERENCES `plant` (`plant_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
